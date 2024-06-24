@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create/Update Employee</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .form-container h1 {
+            text-align: center;
+        }
+        .form-container div {
+            margin-bottom: 15px;
+        }
+        .form-container label {
+            margin-bottom: 5px;
+            display: block;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #333;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1 th:text="${employee.id} == null ? 'Create Employee' : 'Update Employee'"></h1>
+    <form th:action="@{${employee.id} == null ? '/employees' : '/employees/update/' + ${employee.id}}" th:object="${employee}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" required/>
+            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div>
+            <label for="dob">DOB</label>
+            <input type="date" id="dob" th:field="*{dob}" required/>
+            <div class="error" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></div>
+        </div>
+        <div>
+            <label for="bloodGroup">Blood Group</label>
+            <input type="text" id="bloodGroup" th:field="*{bloodGroup}" required/>
+            <div class="error" th:if="${#fields.hasErrors('bloodGroup')}" th:errors="*{bloodGroup}"></div>
+        </div>
+        <div>
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" th:field="*{designation}" required/>
+            <div class="error" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></div>
+        </div>
+        <div>
+            <label for="imageUrl">Image URL</label>
+            <input type="text" id="imageUrl" th:field="*{imageUrl}" required/>
+            <div class="error" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></div>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
+    <a href="/employees">Back to List</a>
+</div>
+</body>
+</html>

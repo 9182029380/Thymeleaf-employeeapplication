@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Employee Profiles</h1>
+    <div class="card-container">
+        <div th:each="employee : ${employees}" class="card">
+            <img th:src="@{${employee.imageUrl}}" alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b th:text="${employee.name}"></b></h4>
+                <p th:text="'ID: ' + ${employee.id}"></p>
+                <p th:text="'DOB: ' + ${employee.dob}"></p>
+                <p th:text="'Blood Group: ' + ${employee.bloodGroup}"></p>
+                <p th:text="'Designation: ' + ${employee.designation}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
